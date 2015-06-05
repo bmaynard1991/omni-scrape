@@ -10,7 +10,7 @@ This gem is meant to be an all purpose web crawler and scraper.  My current focu
 
 2. Store scraped information as html docs.  -done note: Handles 404 errors for bad links.
 
-3. Allow for a partial-url to be passed. -done eg: http://en.wikipedia.org
+3. Allow for a partial-url to be passed. -done
 
 4. Scrape main page and replace links to redirect to generated html then store as html.
 
