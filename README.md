@@ -12,13 +12,15 @@ This gem is meant to be an all purpose web crawler and scraper.  My current focu
 
 3. Allow for a partial-url to be passed. -done
 
-4. Scrape main page and replace links to redirect to generated html then store as html.
+4. Handle both internal and external links.
 
-5. Create file structure for storing the html. 
+5. Scrape main page and replace links to redirect to generated html then store as html.
 
-6. Provide recursive depth implementation for more specified crawling.
+6. Create file structure for storing the html. 
 
-7. Link page to local html docs as they are scraped and stored.
+7. Provide recursive depth implementation for more specified crawling.
 
-8. Manage duplication of stored documents. 
+8. Link page to local html docs as they are scraped and stored.
+
+9. Manage duplication of stored documents. 
 
