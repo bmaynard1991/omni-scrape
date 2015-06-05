@@ -1,5 +1,5 @@
 # omni-scrape
-This is a repository for a new ruby gem called omni_scrape
+This is a repository for a new ruby gem called omni_scrape \n
 
 # description
 This gem is meant to be an all purpose web crawler and scraper.  My current focus for its development will be as follows.
