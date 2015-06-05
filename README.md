@@ -1,6 +1,6 @@
 # omni-scrape
 
-This is a repository for a new ruby gem called omni_scrape \n
+This is a repository for a new ruby gem called omni_scrape 
 
 # description
 
