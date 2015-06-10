@@ -16,13 +16,13 @@ This gem is meant to be an all purpose web crawler and scraper.  My current focu
 
 5. Handle both internal and external links. -done
 
-6. Scrape main page and replace links to redirect to generated html then store as html.
+6. Scrape main page and replace links to redirect to generated html then store as html. -done
 
-7. Create file structure for storing the html. 
+7. Create file structure for storing the html.  -done
 
 8. Provide recursive depth implementation for more specified crawling.
 
-9. Link page to local html docs as they are scraped and stored.
+9. Link page to local html docs as they are scraped and stored. -done
 
 9. Manage duplication of stored documents. 
 
