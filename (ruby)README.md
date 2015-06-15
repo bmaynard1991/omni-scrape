@@ -41,13 +41,14 @@ The second parameter is the depth to crawl.  ***Warning: crawling grows at an IN
 
 The third is a sub-url for internal links.
 
+description: Localize will follow every link from the page provided and scrape the html from those pages, storing it as html files in subdirectories. 
+
+The pages are linked to other local pages.  NOTE: Removed duplication :) 
+
 Method : FLocalize
 
 This is the recursive method called by Localize and shouldn't be used directly.  :)
 
-description: Localize will follow every link from the page provided and scrape the html from those pages, storing it as html files in subdirectories. 
-
-The pages are linked to other local pages.  Currently there is a lot of duplication in this regard.  Note: Working on eliminating the duplication.  
 
 ## Development
 
@@ -57,7 +58,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/omni_scrape/fork )
+1. Fork it ( https://github.com/bmaynard1991/omni-scrape )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

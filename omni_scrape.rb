@@ -1,5 +1,4 @@
 require "omni_scrape/version"
-
 module OmniScrape
     
 ##########################################################################################
@@ -8,6 +7,7 @@ def CrawlScrape(url, depth, sub_url)
     if (depth<0)
         depth=0
     end
+    s_depth = depth
     #open the starting page
 page = Nokogiri::HTML(open(url))
     #collect all of the links from the page
@@ -108,6 +108,7 @@ end#end for each
 def Localize(url, depth, sub_url)
     
  #initialize to extract from user view
+    @location = Hash.new
     s_depth = depth
     i_page = 0
     prev_ipage = 0
@@ -143,8 +144,7 @@ links.each do |link|
 		refarr.push(value)
 		total+=1
 	end
-puts total
-puts "links in page"
+
 
     
     #setup for recognition of the end of the array
@@ -189,9 +189,8 @@ end
 		if (fourofour==false)
             #make relevant links reference local files
             if(refarr[i]['href']!="" && refarr[i]['href']!=nil)
-                puts "link: "
-                puts depth
-                #wutwut
+               
+                
                     j_depth = s_depth - depth
                     appendval = "../"
                     clutch = 0
@@ -209,11 +208,23 @@ end
                     linkref = ((appendval+'../pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
                 end
                 pass_a_link = i_page.to_s+"x"+i.to_s+"page.html"
+                if (@location.has_key?(refarr[i]['href'])) 
+                    refarr[i]['href'] = @location[(refarr[i]['href'])]
+                   
+                else
+                initial_link=refarr[i]['href']
                 refarr[i]['href']=linkref
-                puts refarr[i]['href']
+                
+                #HERE!!!!!**!*!*@*!!@@***!
+                if (depth == s_depth)
+                full_link = "../../"+linkref
+                else
+                    full_link = linkref
+                end
+                @location[initial_link]=linkref
                 #puts "working"
+                end# @location.haskey
             end #refarr[i]['href']!=""
-            
             
             #trim it down and remove special characters for display
             trimval=refarr[i]['href']
@@ -232,7 +243,7 @@ end
 #else Dir.mkdir('./pages'+depth.to_s+'/link'+i.to_s)
 #end
             
-            #this is where we will call the method for each link **********
+       
             
                 
 	end #finval!=nil
@@ -242,8 +253,7 @@ end
 end#end for each
 
 
-    puts "here?"
-   puts depth
+   
     
 else#<< depth not > 0
     check = (refarr.length-1)
@@ -259,7 +269,7 @@ if (depth == s_depth)
 mainpage =File.new('./page.html',"w")    
 mainpage.puts page
 mainpage.close
-puts "finished"
+
 
 else
 #store page from the link in the subdirectory 
@@ -273,7 +283,7 @@ else
                         clutch +=1
                     end
     clutch -=1
-   puts "link to pass"
+   
     crfile=File.new(('./pages'+p_depth.to_s+"/"+clutch.to_s+"set/"+link_to_add),"w")
             crfile.puts page
             crfile.close
@@ -315,8 +325,7 @@ links.each do |link|
 		refarr.push(value)
 		total+=1
 	end
-puts total
-puts "links in page"
+
 
     
     #setup for recognition of the end of the array
@@ -361,9 +370,8 @@ end
 		if (fourofour==false)
             #make relevant links reference local files
             if(refarr[i]['href']!="" && refarr[i]['href']!=nil)
-                puts "link: "
-                puts depth
-                #wutwut
+                
+                
                     j_depth = s_depth - depth
                     appendval = "../"
                     clutch = 0
@@ -381,9 +389,23 @@ end
                     linkref = ((appendval+'../pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
                 end
                 pass_a_link = i_page.to_s+"x"+i.to_s+"page.html"
+                if (@location.has_key?(refarr[i]['href'])) 
+                    pass_a_link = "this_is_a_duplicate"
+                    refarr[i]['href'] = @location[(refarr[i]['href'])]
+                    
+                else
+                initial_link=refarr[i]['href']
                 refarr[i]['href']=linkref
-                puts refarr[i]['href']
+               
+                
+                if (depth == s_depth)
+                full_link = "../../"+linkref
+                else
+                    full_link = linkref
+                end
+                @location[initial_link]=linkref
                 #puts "working"
+                end# @location.haskey
             end #refarr[i]['href']!=""
             
             
@@ -399,12 +421,8 @@ end
           
 		if(finval!=nil)
             self. FLocalize(url, n_depth, sub_url, s_depth, i, i_page, pass_a_link)
-            #create subdirectory for storing current links page
-#if (Dir.exist?('./pages'+depth.to_s+'/link'+i.to_s))
-#else Dir.mkdir('./pages'+depth.to_s+'/link'+i.to_s)
-#end
+           
             
-            #this is where we will call the method for each link **********
             
                 
 	end #finval!=nil
@@ -414,14 +432,14 @@ end
 end#end for each
 
 
-    puts "here?"
-   puts depth
+    
     
 else#<< depth not > 0
     check = (refarr.length-1)
     for i in 0..check
         if (refarr[i]['href']!=nil && refarr[i]['href']!="")
         refarr[i]['href']=""
+        
         end
     end
 end
@@ -431,11 +449,11 @@ if (depth == s_depth)
 mainpage =File.new('./page.html',"w")    
 mainpage.puts page
 mainpage.close
-puts "finished"
+
 
 else
 #store page from the link in the subdirectory 
-    puts "page: "
+   
     p_depth = depth +1
      j_depth = s_depth - depth
                     appendval = ""
@@ -445,13 +463,18 @@ else
                         clutch +=1
                     end
     clutch -=1
-   puts "link to pass"
+   
+    if (link_to_add!="this_is_a_duplicate")
+
     crfile=File.new(('./pages'+p_depth.to_s+"/"+clutch.to_s+"set/"+link_to_add),"w")
             crfile.puts page
             crfile.close
+    else
+        
+    end
     
 end
-end #end def Localize
+end #end def FLocalize
 
 #########################################################################################
 
