@@ -202,15 +202,17 @@ end
                 else Dir.mkdir('./pages'+depth.to_s+"/"+clutch.to_s+"set")
                 end 
                 if (depth == s_depth)
+                   
                     linkref = (('./pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
                 else
-                    
+                   
                     linkref = ((appendval+'../pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
                 end
                 pass_a_link = i_page.to_s+"x"+i.to_s+"page.html"
                 if (@location.has_key?(refarr[i]['href'])) 
-                    refarr[i]['href'] = @location[(refarr[i]['href'])]
-                   
+                    loc = @location[(refarr[i]['href'])]
+                    sub_loc = loc.match(/(.\/[a-z]{5}\d{1,20}\/\d{1,20}[a-z]{3}\/\d{1,20}[x]\d{1,20}[a-z]{4}.[a-z]{1,20})/)
+                   refarr[i]['href'] =sub_loc
                 else
                 initial_link=refarr[i]['href']
                 refarr[i]['href']=linkref
@@ -221,7 +223,7 @@ end
                 else
                     full_link = linkref
                 end
-                @location[initial_link]=linkref
+                @location[initial_link]=full_link
                 #puts "working"
                 end# @location.haskey
             end #refarr[i]['href']!=""
@@ -382,12 +384,9 @@ end
                 if (Dir.exist?('./pages'+depth.to_s+"/"+clutch.to_s+"set"))
                 else Dir.mkdir('./pages'+depth.to_s+"/"+clutch.to_s+"set")
                 end 
-                if (depth == s_depth)
-                    linkref = (('./pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
-                else
                     
-                    linkref = ((appendval+'../pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html").chomp)
-                end
+                    linkref = ((appendval+'../pages'+depth.to_s+"/"+clutch.to_s+"set/"+i_page.to_s+"x"+i.to_s+"page.html"))
+              
                 pass_a_link = i_page.to_s+"x"+i.to_s+"page.html"
                 if (@location.has_key?(refarr[i]['href'])) 
                     pass_a_link = "this_is_a_duplicate"
@@ -398,11 +397,9 @@ end
                 refarr[i]['href']=linkref
                
                 
-                if (depth == s_depth)
-                full_link = "../../"+linkref
-                else
+                
                     full_link = linkref
-                end
+             
                 @location[initial_link]=linkref
                 #puts "working"
                 end# @location.haskey
