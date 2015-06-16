@@ -1,6 +1,6 @@
 # omni-scrape
 
-This is a repository for a new ruby gem called omni_scrape 
+This is a repository for a new ruby gem called omni_scrape (your all-purpose web scraper)
 
 # description
 
@@ -28,11 +28,9 @@ This gem is meant to be an all purpose web crawler and scraper.  My current focu
 
 10. Provide methods for explicitly internal and explicitly external links.
 
-11. Provide method for just scraping initial page.
+11. Provide method for just scraping initial page. -done (just pass 0)
 
-12. Provide a method for passing a css accessor for just first page. (e.g. 'body')
-
-13. Provide a method for passing a css accessor for all pages.
+12. Provide a method for passing a css accessor for all pages.
 
 
 
