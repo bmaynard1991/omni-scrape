@@ -9,7 +9,7 @@ def CrawlScrape(url, depth, sub_url)
     end#if
     s_depth = depth #true
     #open the starting page
-page = Nokogiri::HTML(open(url))  #good
+page = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))  #good
     #collect all of the links from the page
 links= page.css('a') #good
 
@@ -53,7 +53,7 @@ for i in 0..check
 	   
 		begin
 			if(fourofour==false)
-			pagina = Nokogiri::HTML(open(url))
+			pagina = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
 			end#if
             #test for a 404
 		rescue Exception =>ex
@@ -87,7 +87,7 @@ def Localize(url, depth, sub_url)
         depth=0
     end
     #open the starting page
-page = Nokogiri::HTML(open(url))
+page = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
     #collect all of the links from the page
 links= page.css('a')
     title = page.css('title')
@@ -144,7 +144,7 @@ end
 	   
 		begin
 			if(fourofour==false)
-			pagina = Nokogiri::HTML(open(url))
+			pagina = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
 			end
             #test for a 404
 		rescue Exception =>ex
@@ -270,7 +270,7 @@ def FLocalize(url, depth, sub_url, s_depth, i_page, prev_ipage, link_to_add)
     if (depth<0)
         depth=0
     end
-page = Nokogiri::HTML(open(url))
+page = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
     #collect all of the links from the page
 links= page.css('a')
     title = page.css('title')
@@ -327,7 +327,7 @@ end
 	   
 		begin
 			if(fourofour==false)
-			pagina = Nokogiri::HTML(open(url))
+			pagina = Nokogiri::HTML(open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
 			end
             #test for a 404
 		rescue Exception =>ex
