@@ -6,101 +6,71 @@ module OmniScrape
 def CrawlScrape(url, depth, sub_url)
     if (depth<0)
         depth=0
-    end
-    s_depth = depth
+    end#if
+    s_depth = depth #true
     #open the starting page
-page = Nokogiri::HTML(open(url))
+page = Nokogiri::HTML(open(url))  #good
     #collect all of the links from the page
-links= page.css('a')
+links= page.css('a') #good
 
     #initialize variables
 refarr=[]
-titlearr=[]
-titles =[]
 hrefs = []
-x=0
     #add title and href to arrays for each link
 links.each do |link|
-			if(link['title']!=nil && link['title']!="" &&link['href']!=nil && link['href']!="")
-			# puts x
-			# puts (link['title'].split.join)
-			# x+=1
-			titles.push((link['title']).split.join)
-			hrefs.push((link['href']).split.join)
-				
-			end
-			
-    end
-	inc=0
+			if(link['href']!=nil && link['href']!="")
+			hrefs.push(link)
+			end#if
+    end#do
+	
     #transfer links to other array
 	while(!hrefs.empty?)
 		value= hrefs.pop
-		puts value
+	
 		refarr.push(value)
-		refarr[inc]
-		inc+=1
-	end
-	inc=0
-    #transfer titles to other array
-    while(!titles.empty?)
-       value = titles.pop
-	   puts value
-	   titlearr.push(value)
-	   puts titlearr[inc]
-	   inc+=1
-	end
-    #setup for recognition of the end of the array
+		
+		
+	end#while
+	#setup for recognition of the end of the array
         refarr.push("-")
   
     #create folder for storing current set of scraped pages
-    g_depth = s_depth
-    while (g_depth>-1)
-    if (Dir.exist?('./pages'+g_depth.to_s))
-    else Dir.mkdir('./pages'+g_depth.to_s)
-end
-        g_depth =g_depth-1
-    end
     
+    if (Dir.exist?('./results'+depth.to_s))
+    else Dir.mkdir('./results'+depth.to_s)
+	end#if    
     #in each link 
-for i in 1..titlearr.length
-    if(refarr[i]!="-")
+	check =(refarr.length-1)
+for i in 0..check
+    if(refarr[i]!="-")#still valid links
         #evaluate whether link is internal or external
-        if(refarr[i].include?('http://'))
-            url=refarr[i]
+        if(refarr[i]['href'].include?('http://') && refarr[i]!=nil)
+            url=refarr[i]['href']
             else
-    url=sub_url+refarr[i]
-            end
+    url=sub_url+refarr[i]['href']
+            end#if include?
 	fourofour=false
 	   
 		begin
 			if(fourofour==false)
 			pagina = Nokogiri::HTML(open(url))
-			end
+			end#if
             #test for a 404
 		rescue Exception =>ex
-			puts "got a 404"
+			
 			fourofour=true
 			retry
-		end
+		end#begin
 		if (fourofour==false)
-            #trim it down and remove special characters
-		trimval=titlearr[i]
-		finval=trimval.gsub!(/[!:\/-]/, '')
-        puts titlearr[i]
-		if(finval==nil && titlearr[i]!=nil)
-		finval=titlearr[i]
-		end
-		puts finval
-		if(finval!=nil)
             #store html from the link with title of the link
-            crfile=File.new(('./results'+depth.to_s+"/"+finval+".html").chomp,"w")
+            crfile=File.new(('./results'+depth.to_s+"/page"+i.to_s+".html").chomp,"w")
     crfile.puts pagina
     crfile.close
-	end
-	end
-        end
+	end#if
+	end#if  != "-"
+        
 end#end for each
-    puts "finished"
+    
 	end#def crawlscrape
 
 #############################################################################################
