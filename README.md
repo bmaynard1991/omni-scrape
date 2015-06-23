@@ -26,11 +26,13 @@ This gem is meant to be an all purpose web crawler and scraper.  My current focu
 
 9. Manage duplication of stored documents. -done
 
-10. Provide methods for explicitly internal and explicitly external links.
+10. Provide methods for explicitly internal and explicitly external links. -done
 
 11. Provide method for just scraping initial page. -done (just pass 0)
 
-12. Provide a method for passing a css accessor for all pages.
+12. Provide a method for passing a css accessor for all pages. -done
+
+MORE COMING SOON! ...
 
 
 

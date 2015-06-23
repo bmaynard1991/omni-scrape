@@ -29,11 +29,11 @@ This method takes three parameters the first should be the url to start at.
 
 The second parameter is currently unimplemented but will be the depth to crawl. (just pass it 1) 
 
-The third is a sub-url for internal links.
+The third is a sub-url for internal links.q
 
 Method : Localize
 
-example : OmniScrape.Localize("http://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "http://en.wikipedia.org")
+example : OmniScrape.Localize("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org")
 
 This method takes three parameters the first should be the url to start at.  
 
@@ -45,16 +45,43 @@ description: Localize will follow every link from the page provided and scrape t
 
 The pages are linked to other local pages.  NOTE: Removed duplication :) 
 
-Method : FLocalize
+Method : Localize_CSS
 
-This is the recursive method called by Localize and shouldn't be used directly.  :)
+example:OmniScrape.Localize_CSS("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org", "div table.wikitable")
 
+This method takes four parameters the first should be the url to start at.  
 
-## Development
+The second parameter is the depth to crawl.  ***Warning: crawling may grow at an INSANE rate.  
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+The third is a sub-url for internal links.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The fourth is a css selector for what parts of all pages you want to take the links for.
+
+description:  Localize_CSS offers the same service that Localize provides while at the same time giving you the option to limit the result set using a css selector.
+
+Method : Localize_IN
+
+example : OmniScrape.Localize_IN("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org")
+
+This will perform the same actions as Localize, but only for internal links
+
+Method : Localize_EX
+
+example : OmniScrape.Localize_EX("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org")
+
+This will perform the same actions as Localize, but only for external links
+
+Method : Localize_IN_CSS
+
+example : OmniScrape.Localize_IN_CSS("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org", "div table.wikitable")
+
+This will perform the same actions as Localize_CSS, but only for internal links
+
+Method : Localize_EX_CSS
+
+example : OmniScrape.Localize_EX_CSS("https://en.wikipedia.org/wiki/List_of_massively_multiplayer_online_role-playing_games", 1, "https://en.wikipedia.org", "div table.wikitable")  NOTE: There are no external links in the wikitable! 
+
+This will perform the same actions as Localize_CSS, but only for external links. 
 
 ## Contributing
 
